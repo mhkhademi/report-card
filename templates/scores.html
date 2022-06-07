@@ -1,0 +1,210 @@
+{% load static %}
+<html lang="fa" dir="rtl">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Site title -->
+  <title>مشاهده نمرات</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.0.0/css/bootstrap.min.css" integrity="sha384-P4uhUIGk/q1gaD/NdgkBIl3a6QywJjlsFJFk7SPRdruoGddvRVSwv5qFnvZ73cpz" crossorigin="anonymous">
+</head>
+<body oncontextmenu="return false">
+  <style>
+	@font-face {
+	  font-family: Estedad;
+	  src: url({% static 'font/Estedad.ttf' %});
+	}
+    body {
+      background-color: rgb(233, 242, 255);
+      font-family: Estedad;
+    }
+  </style>
+  <div class="container">
+    <br>
+    <br>
+    <a style="font-size: 30px; color: #FF0000;" href="{% url 'home' %}" class="d-flex justify-content-center">بازگشت به خانه</a>
+    <br>
+    <br>
+    <br>
+    <br>
+    <!-- Student informations -->
+    {% if ok %}
+      <h2 class="d-flex justify-content-center">نام دانش آموز : {{student.name}}</h2>
+      <h2 class="d-flex justify-content-center">کد ملی دانش آموز : {{student.nationalcode}}</h2>
+      <h2 class="d-flex justify-content-center">شماره کلاس : {{student.class_number}}</h2>
+      <h2 class="d-flex justify-content-center">ترم : {{term}}</h2>
+    {% endif %}
+    <br>
+    <!-- If student enter a wrong information, He/She should login again -->
+    {% if messages %}
+    <ul class="messages d-flex justify-content-center">
+      {% for message in messages %}
+      <div class="alert alert-danger" role="alert">
+        {{ message }} <a href="{% url 'getscore:scorehome' %}"><b>  ورود دوباره  </b></a>
+      </div>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    <br>
+    <!-- Studente scores -->
+    {% if ok %}
+      <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-success btn-lg" onclick="printReportcard()">چاپ کارنامه</button>
+      </div>
+      <br>
+      <table class="table table-dark" id="reportcard" border="1">
+        <thead>
+          <tr>
+            <th scope="col">نام درس</th>
+            <th scope="col">نمره</th>
+            <th scope="col">میانگین</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">ریاضی</th>
+            <td>{{mathscore}}</td>
+            <td>{{mathscore}}</td>
+          </tr>
+          <tr>
+            <th scope="row">ادبیات فارسی</th>
+            <td>{{literaturescore}}</td>
+            <td>{{literaturescore}}</td>
+          </tr>
+          {% if student.class_number == 701 or student.class_number == 702 or student.class_number == 703 or student.grade_number == 801 or student.grade_number == 802 or student.grade_number == 803 %}
+            <tr>
+              <th scope="row">تفکر و سبک زندگی</th>
+              <td>{{lifestylescore}}</td>
+              <td>{{lifestylescore}}</td>
+            </tr>
+          {% endif %}
+          {% if student.class_number == 901 or student.class_number == 902 or student.class_number == 903 %}
+            <tr>
+              <th scope="row">دفاعی</th>
+              <td>{{defensescore}}</td>
+              <td>{{defensescore}}</td>
+            </tr>
+          {% endif %}
+          <tr>
+            <th scope="row">هنر</th>
+            <td>{{artscore}}</td>
+            <td>{{artscore}}</td>
+          </tr>
+          <tr>
+            <th scope="row">مطالعات اجتماعی</th>
+            <td>{{socialstudiesscore}}</td>
+            <td>{{socialstudiesscore}}</td>
+          </tr>
+          <tr>
+            <th scope="row">زبان انگلیسی</th>
+            <td>{{englishscore}}</td>
+            <td>{{englishscore}}</td>
+          </tr>
+          <tr>
+            <th scope="row">کار و فناوری</th>
+            <td>{{computerscore}}</td>
+            <td>{{computerscore}}</td>
+          </tr>
+          <tr>
+            <th scope="row">دینی</th>
+            <td>{{religiousscore}}</td>
+            <td>{{religiousscore}}</td>
+          </tr>
+          <tr>
+            <th scope="row">قرآن</th>
+            <td>{{quranscore}}</td>
+            <td>{{quranscore}}</td>
+          </tr>
+          {% if sciencescore == 'نمره هنوز ثبت نشده' %}
+          <tr>
+            <th scope="row">زیست</th>
+            <td>{{biologycore}}</td>
+            <td>{{biologycore}}</td>
+          </tr>
+          <tr>
+            <th scope="row">فیزیک</th>
+            <td>{{physicsscore}}</td>
+            <td>{{physicsscore}}</td>
+          </tr>
+          <tr>
+            <th scope="row">شیمی</th>
+            <td>{{chemistryscore}}</td>
+            <td>{{chemistryscore}}</td>
+          </tr>
+          {% else %}
+          <tr>
+            <th scope="row">علوم تجربی</th>
+            <td>{{sciencescore}}</td>
+            <td>{{sciencescore}}</td>
+          </tr>
+          {% endif %}
+          <tr>
+            <th scope="row">تربیت بدنی</th>
+            <td>{{sportscore}}</td>
+            <td>{{sportscore}}</td>
+          </tr>
+          <tr>
+            <th scope="row">زبان عربی</th>
+            <td>{{arabicscore}}</td>
+            <td>{{arabicscore}}</td>
+          </tr>
+          <tr>
+            <th scope="row">انشا</th>
+            <td>{{essayscore}}</td>
+            <td>{{essayscore}}</td>
+          </tr>
+          <tr>
+            <th scope="row">املا</th>
+            <td>{{spellingscore}}</td>
+            <td>{{spellingscore}}</td>
+          </tr>
+        </tbody>
+      </table>
+    {% endif %}
+  </div>
+</body>
+<!-- Block inspect -->
+<script>
+  document.onkeydown = function(e) {
+    if(event.keyCode == 123) {
+      return false;
+    }
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+      return false;
+    }
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+      return false;
+    }
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+      return false;
+    }
+    if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+      return false;
+    }
+  }
+</script>
+
+<!-- Jquery JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.rtlcss.com/bootstrap/v4.0.0/js/bootstrap.min.js" integrity="sha384-54+cucJ4QbVb99v8dcttx/0JRx4FHMmhOWi4W+xrXpKcsKQodCBwAvu3xxkZAwsH" crossorigin="anonymous"></script>
+
+<!-- Print JS -->
+<script>
+  function printReportcard(){
+    var divToPrint=document.getElementById("reportcard");
+    newWin= window.open("");
+    newWin.document.write(divToPrint.outerHTML);
+    newWin.print();
+    newWin.close();
+  }
+</script>
+</html>

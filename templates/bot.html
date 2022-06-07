@@ -1,0 +1,88 @@
+{% load static %}
+<html lang="fa" dir="rtl">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Site title -->
+  <title>ربات</title>
+  
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.0.0/css/bootstrap.min.css" integrity="sha384-P4uhUIGk/q1gaD/NdgkBIl3a6QywJjlsFJFk7SPRdruoGddvRVSwv5qFnvZ73cpz" crossorigin="anonymous">
+</head>
+<body>
+  <style>
+	@font-face {
+	  font-family: Estedad;
+	  src: url({% static 'font/Estedad.ttf' %});
+	}
+    body {
+      background-color: rgb(233, 242, 255);
+      font-family: Estedad;
+    }
+	hr {
+		padding: 0%;
+		background-color: #000000;
+		width: 97%
+	}
+  </style>
+  <div class="container">
+    <br>
+    <br>
+    <a style="font-size: 30px; color: #FF0000;" href="{% url 'home' %}" class="d-flex justify-content-center">بازگشت به خانه</a>
+    <br>
+    <br>
+    <br>
+    {% if messages %}
+    <ul class="messages d-flex justify-content-center">
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}" role="alert">
+        {{ message }}
+      </div>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    <br>
+    <h1 class="d-flex justify-content-center">ورود داده توسط ربات</h1>
+    <br>
+    <br>
+    <br>
+    <form action="{% url 'upload' %}" method="post" enctype=multipart/form-data> 
+      {% csrf_token %}
+      <div class="input-group">
+      <div class="custom-file">
+          <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="file" Required>
+          <label class="custom-file-label" for="inputGroupFile01">انتخاب فایل</label>
+      </div>
+      <button class="btn btn-primary ml-2" id="inputGroupFileAddon01" type="submit"><i class="fas fa-upload mr-1"></i>آپلود</button>
+      </div>
+    </form>
+    <br>
+    <br>
+    <form action="{% url 'delete' %}" method="post"> 
+      {% csrf_token %}
+      <div class="input-group">
+      <button class="btn btn-primary ml-2" id="inputGroupFileAddon01" type="submit"><i class="fas fa-upload mr-1"></i>حذف همه داده ها</button>
+      </div>
+    </form>
+  </div>
+</body>
+<!-- Jquery JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.rtlcss.com/bootstrap/v4.0.0/js/bootstrap.min.js" integrity="sha384-54+cucJ4QbVb99v8dcttx/0JRx4FHMmhOWi4W+xrXpKcsKQodCBwAvu3xxkZAwsH" crossorigin="anonymous"></script>
+
+<script>
+  // Add the following code if you want the name of the file appear on select
+  $(".custom-file-input").on("change", function() {
+    var fileName = $(this).val().split("\\").pop();
+    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+  });
+</script>
+</html>

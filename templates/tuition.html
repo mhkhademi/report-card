@@ -1,0 +1,65 @@
+{% load static %}
+<html lang="fa" dir="rtl">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Site title -->
+  <title>پرداخت شهریه</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.0.0/css/bootstrap.min.css" integrity="sha384-P4uhUIGk/q1gaD/NdgkBIl3a6QywJjlsFJFk7SPRdruoGddvRVSwv5qFnvZ73cpz" crossorigin="anonymous">
+</head>
+<body>
+    <style>
+		@font-face {
+		  font-family: Estedad;
+		  src: url({% static 'font/Estedad.ttf' %});
+		}
+        body {
+          background-color: rgb(233, 242, 255);
+          font-family: Estedad;
+        }
+    </style>
+    <div class="container">
+        <br>
+        <br>
+        <a style="font-size: 30px;" href="{% url 'home' %}" class="d-flex justify-content-center">بازگشت به خانه</a>
+        <br>
+        <br>
+        <br>
+        <br>
+        <h2 class="d-flex justify-content-center">نام دانش آموز : {{name}}</h2>
+        <h2 class="d-flex justify-content-center">کد ملی دانش آموز : {{nationalcode}}</h2>
+	      <h2 class="d-flex justify-content-center">باقیمانده شهریه به عدد (تومان) : {{tuition}}</h2>
+	      <h2 class="d-flex justify-content-center">باقیمانده شهریه به حروف (تومان) : {{tuitionfa}}</h2>
+        <br>
+        <br>
+        <div class="d-flex justify-content-center">
+          <form class="form-inline" action="https://nextpay.org/nx/gateway/payment/{{ trans_id }}" method="post">
+            {% if tuition %}
+              {% csrf_token %}
+              <button type="submit" class="btn btn-secondary btn-lg">پرداخت شهریه</button>
+            {% else %}
+              <button type="submit" class="btn btn-secondary btn-lg" disabled>پرداخت شهریه</button>
+            {% endif %}
+          </form>
+        </div>
+        <br>
+        <div class="d-flex justify-content-center">
+          <style>#nextpay{margin:auto} #nextpay img {width: 80px;}</style> <div id="nextpay">
+            <script src="https://nextpay.org/nx/js-trust/18138" type="text/javascript"></script> </div>
+        </div>
+    </div>
+</body>
+<!-- Jquery JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.rtlcss.com/bootstrap/v4.0.0/js/bootstrap.min.js" integrity="sha384-54+cucJ4QbVb99v8dcttx/0JRx4FHMmhOWi4W+xrXpKcsKQodCBwAvu3xxkZAwsH" crossorigin="anonymous"></script>
+</html>

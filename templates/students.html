@@ -1,0 +1,82 @@
+{% load static %}
+<html lang="fa" dir="rtl">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Site title -->
+  <title>مشاهده نمرات</title>
+  
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.0.0/css/bootstrap.min.css" integrity="sha384-P4uhUIGk/q1gaD/NdgkBIl3a6QywJjlsFJFk7SPRdruoGddvRVSwv5qFnvZ73cpz" crossorigin="anonymous">
+</head>
+<body>
+  <style>
+	@font-face {
+	  font-family: Estedad;
+	  src: url({% static 'font/Estedad.ttf' %});
+	}
+    body {
+      background-color: rgb(233, 242, 255);
+      font-family: Estedad;
+    }
+	hr {
+		padding: 0%;
+		background-color: #000000;
+		width: 97%
+	}
+  </style>
+  <div class="container">
+    <br>
+    <br>
+    <a style="font-size: 30px; color: #FF0000;" href="{% url 'home' %}" class="d-flex justify-content-center">بازگشت به خانه</a>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h1 class="d-flex justify-content-center">ورود دانش آموزان</h1>
+    <br>
+    <br>
+    <br>
+    <!-- Information form for scores show -->
+    <form action="{% url 'getscore:seescore' %}" method="post">
+      {% csrf_token %}
+      <div class="form-group mx-sm-3 mb-2">
+        <label for="inputPassword2" class="sr-only">کد ملی دانش آموز</label>
+        <input class="form-control" id="inputPassword2" placeholder="کد ملی دانش آموز" required name="nationalcode">
+      </div>
+	  <hr>
+      <div class="form-group mx-sm-3 mb-2">
+        <label for="inputPassword2" class="sr-only">رمز عبور</label>
+        <input class="form-control" id="inputPassword2" placeholder="رمز عبور" type="password" required name="password">
+      </div>
+	  <hr>
+	  <div class="form-group mx-sm-3 mb-2">
+	    <select class="form-control" name="term" required>
+		    <option value="1">مهر</option>
+		    <option value="2">آبان</option>
+		    <option value="3">آذر</option>
+		    <option value="4">نوبت اول</option>
+		    <option value="5">بهمن</option>
+		    <option value="6">اسفند</option>
+		    <option value="7">فروردین</option>
+		    <option value="8">اردیبهشت</option>
+		    <option value="9">نوبت دوم</option>
+	    </select>
+	  </div>
+	  </br>
+      <button type="submit" class="btn btn-primary form-group mx-sm-3 mb-2">مشاهده نمرات</button>
+    </form>
+  </div>
+</body>
+<!-- Jquery JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.rtlcss.com/bootstrap/v4.0.0/js/bootstrap.min.js" integrity="sha384-54+cucJ4QbVb99v8dcttx/0JRx4FHMmhOWi4W+xrXpKcsKQodCBwAvu3xxkZAwsH" crossorigin="anonymous"></script>
+</html>

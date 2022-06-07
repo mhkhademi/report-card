@@ -1,0 +1,210 @@
+{% load static %}
+<!doctype html>
+<html lang="fa">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.0.0/css/bootstrap.min.css" integrity="sha384-P4uhUIGk/q1gaD/NdgkBIl3a6QywJjlsFJFk7SPRdruoGddvRVSwv5qFnvZ73cpz" crossorigin="anonymous">
+
+    <!-- Site title -->
+    <title>سامانه نمرات علامه حلی 1 همدان</title>
+  </head>
+  <body>
+      <style>
+		  @font-face {
+			font-family: Estedad;
+			src: url({% static 'font/Estedad.ttf' %});
+		  }
+          body {
+            background-color: rgb(233, 242, 255);
+            font-family: Estedad;
+          }
+      </style>
+	  <div class="container d-lg-none d-xl-none">
+		  <br>
+		  <div class="alert alert-warning" role="alert">
+			  برای نمایش بهتر آمار ، لطفا از صفحه نمایش بزرگتر استفاده نمایید
+		  </div>
+	  </div>
+      <div class="container d-none d-lg-block d-xl-block">
+		<br>
+		<div class='row'>
+			<div style='width: 17.5%'></div>
+			<div class="card" style="width: 65%;">
+				<h5 class="card-header">آمار کل</h5>
+				<div class="card-body">
+					<canvas id="allStatistics" style="width:100%;max-width:700px"></canvas>
+				</div>
+			</div>
+			<div style='width: 17.5%'></div>
+		</div>
+		<br>
+		<div class='row'>
+			<div class="card" style="width: 48%;">
+			  <h5 class="card-header">تعداد دانش آموزان نهم</h5>
+			  <div class="card-body">
+				<canvas id="900Students" style="width:100%;max-width:700px"></canvas>
+			  </div>
+			</div>
+			<div style='width: 4%'></div>
+			<div class="card" style="width: 48%;">
+			  <h5 class="card-header">تعداد کل دانش آموزان</h5>
+			  <div class="card-body">
+				<canvas id="allStudents" style="width:100%;max-width:700px"></canvas>
+			  </div>
+			</div>
+		</div>
+		<br>
+		<div class='row'>
+			<div class="card" style="width: 48%;">
+			  <h5 class="card-header">تعداد دانش آموزان هفتم</h5>
+			  <div class="card-body">
+				<canvas id="700Students" style="width:100%;max-width:700px"></canvas>
+			  </div>
+			</div>
+			<div style='width: 4%'></div>
+			<div class="card" style="width: 48%;">
+			  <h5 class="card-header">تعداد دانش آموزان هشتم</h5>
+			  <div class="card-body">
+				<canvas id="800Students" style="width:100%;max-width:700px"></canvas>
+			  </div>
+			</div>
+		</div>
+		<br>
+      </div>
+  </body>
+  <!-- Chart JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+  <script>
+	var xValues = ["نهم", "هشتم", "هفتم"];
+	var yValues = [{{9St}}, {{8St}}, {{7St}}];
+	var barColors = [
+	  "#b91d47",
+	  "#00aba9",
+	  "#2b5797"
+	];
+
+	new Chart("allStudents", {
+	  type: "doughnut",
+	  data: {
+		labels: xValues,
+		datasets: [{
+		  backgroundColor: barColors,
+		  data: yValues
+		}]
+	  },
+	  options: {
+		title: {
+		  display: true,
+		  text: "کل دانش آموزان"
+		}
+	  }
+	});
+	var xValues = ["903", "902", "901"];
+	var yValues = [{{903St}}, {{902St}}, {{901St}}];
+	var barColors = [
+	  "#b91d47",
+	  "#00aba9",
+	  "#2b5797"
+	];
+
+	new Chart("900Students", {
+	  type: "doughnut",
+	  data: {
+		labels: xValues,
+		datasets: [{
+		  backgroundColor: barColors,
+		  data: yValues
+		}]
+	  },
+	  options: {
+		title: {
+		  display: true,
+		  text: "دانش آموزان نهم"
+		}
+	  }
+	});
+	var xValues = ["703", "702", "701"];
+	var yValues = [{{703St}}, {{702St}}, {{701St}}];
+	var barColors = [
+	  "#b91d47",
+	  "#00aba9",
+	  "#2b5797"
+	];
+
+	new Chart("700Students", {
+	  type: "doughnut",
+	  data: {
+		labels: xValues,
+		datasets: [{
+		  backgroundColor: barColors,
+		  data: yValues
+		}]
+	  },
+	  options: {
+		title: {
+		  display: true,
+		  text: "دانش آموزان هفتم"
+		}
+	  }
+	});
+	var xValues = ["803", "802", "801"];
+	var yValues = [{{803St}}, {{802St}}, {{801St}}];
+	var barColors = [
+	  "#b91d47",
+	  "#00aba9",
+	  "#2b5797"
+	];
+
+	new Chart("800Students", {
+	  type: "doughnut",
+	  data: {
+		labels: xValues,
+		datasets: [{
+		  backgroundColor: barColors,
+		  data: yValues
+		}]
+	  },
+	  options: {
+		title: {
+		  display: true,
+		  text: "دانش آموزان هشتم"
+		}
+	  }
+	});
+	var xValues = ["تعداد کل دانش آموزان", "تعداد معلمان"];
+	var yValues = [{{allSt}}, {{allTh}}];
+	var barColors = ["red", "blue"];
+
+	new Chart("allStatistics", {
+	  type: "bar",
+	  data: {
+		labels: xValues,
+		datasets: [{
+		  backgroundColor: barColors,
+		  data: yValues
+		}]
+	  },
+	  options: {
+		legend: {display: false},
+		title: {
+		  display: true,
+		  text: "آمار کل"
+		}
+	  }
+	});
+  </script>
+  
+  <!-- Jquery JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+  <!-- Popper JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.rtlcss.com/bootstrap/v4.0.0/js/bootstrap.min.js" integrity="sha384-54+cucJ4QbVb99v8dcttx/0JRx4FHMmhOWi4W+xrXpKcsKQodCBwAvu3xxkZAwsH" crossorigin="anonymous"></script>
+</html>
