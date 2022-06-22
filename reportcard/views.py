@@ -6,8 +6,7 @@ from main.models import Alert
 from django.core.files.storage import FileSystemStorage
 from django.contrib import messages
 from main import models
-import xlrd
-from time import sleep
+import subprocess
 
 TERM_CHOICES = {
     "1",
@@ -34,41 +33,12 @@ def bot(request):
 def upload(request):
     file = request.FILES['file']
     fs = FileSystemStorage(location='bot')
-    # import ipdb;ipdb.set_trace()
     if file.name.split('.')[-1]=='xlsx':
         filename = 'data.xlsx'
         if fs.exists(filename):
             fs.delete(filename)
         fs.save(filename, file)
-        wb = xlrd.open_workbook('bot/data.xlsx')
-        sheet = wb.sheet_by_index(0)
-        for i in range(sheet.nrows):
-            cname=sheet.cell_value(i, 0)
-            nationalcode=int(sheet.cell_value(i, 1))
-            grade_number=int(sheet.cell_value(i, 2))
-            class_number=int(sheet.cell_value(i, 3))
-            models.Student(name=cname, nationalcode=nationalcode, password=nationalcode, grade_number=grade_number, class_number=class_number).save()
-            for term in TERM_CHOICES:
-                models.Mathscore(name=cname, nationalcode=nationalcode, grade_number=class_number,term=term).save()
-                models.Literaturescore(name=cname, nationalcode=nationalcode, grade_number=class_number,term=term).save()
-                models.Englishscore(name=cname, nationalcode=nationalcode, grade_number=class_number,term=term).save()
-                models.Socialstudiesscore(name=cname, nationalcode=nationalcode, grade_number=class_number,term=term).save()
-                models.Artscore(name=cname, nationalcode=nationalcode, grade_number=class_number,term=term).save()
-                if grade_number == 9:
-                    models.Defensescore(name=cname, nationalcode=nationalcode, grade_number=class_number,term=term).save()
-                else:
-                    models.Lifestylescore(name=cname, nationalcode=nationalcode, grade_number=class_number,term=term).save()
-                models.Computerscore(name=cname, nationalcode=nationalcode, grade_number=class_number,term=term).save()
-                models.Religiousscore(name=cname, nationalcode=nationalcode, grade_number=class_number,term=term).save()
-                models.Quranscore(name=cname, nationalcode=nationalcode, grade_number=class_number,term=term).save()
-                models.Biologycore(name=cname, nationalcode=nationalcode, grade_number=class_number,term=term).save()
-                models.Physicsscore(name=cname, nationalcode=nationalcode, grade_number=class_number,term=term).save()
-                models.Chemistryscore(name=cname, nationalcode=nationalcode, grade_number=class_number,term=term).save()
-                models.Sciencescore(name=cname, nationalcode=nationalcode, grade_number=class_number,term=term).save()
-                models.Sportscore(name=cname, nationalcode=nationalcode, grade_number=class_number,term=term).save()
-                models.Arabicscore(name=cname, nationalcode=nationalcode, grade_number=class_number,term=term).save()
-                models.Essayscore(name=cname, nationalcode=nationalcode, grade_number=class_number,term=term).save()
-                models.Spellingscore(name=cname, nationalcode=nationalcode, grade_number=class_number,term=term).save()
+        subprocess.Popen(["python", "bot/main.py", "delete"])
         messages.success(request, 'فایل با موفقیت آپلود شد')
     else:
         messages.warning(request, 'فرمت فایل حتما باید اکسل باشد')
@@ -76,26 +46,7 @@ def upload(request):
 
 
 def delete(request):
-    # import ipdb;ipdb.set_trace()
-    models.Student.objects.all().delete()
-    models.Mathscore.objects.all().delete()
-    models.Literaturescore.objects.all().delete()
-    models.Englishscore.objects.all().delete()
-    models.Socialstudiesscore.objects.all().delete()
-    models.Artscore.objects.all().delete()
-    models.Defensescore.objects.all().delete()
-    models.Lifestylescore.objects.all().delete()
-    models.Computerscore.objects.all().delete()
-    models.Religiousscore.objects.all().delete()
-    models.Quranscore.objects.all().delete()
-    models.Biologycore.objects.all().delete()
-    models.Physicsscore.objects.all().delete()
-    models.Chemistryscore.objects.all().delete()
-    models.Sciencescore.objects.all().delete()
-    models.Sportscore.objects.all().delete()
-    models.Arabicscore.objects.all().delete()
-    models.Essayscore.objects.all().delete()
-    models.Spellingscore.objects.all().delete()
+    subprocess.Popen(["python", "bot/main.py", "delete"])
     messages.success(request, 'داده ها با موفقیت حذف شدند')
     return redirect(bot)
 
