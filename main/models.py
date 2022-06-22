@@ -41,7 +41,7 @@ class Student(models.Model):
         models.Computerscore.get(nationalcode=self.nationalcode).delete()
         models.Religiousscore.get(nationalcode=self.nationalcode).save()
         models.Quranscore.get(nationalcode=self.nationalcode).delete()
-        models.Biologycore.get(nationalcode=self.nationalcode).delete()
+        models.Biologyscore.get(nationalcode=self.nationalcode).delete()
         models.Physicsscore.get(nationalcode=self.nationalcode).delete()
         models.Chemistryscore.get(nationalcode=self.nationalcode).delete()
         models.Sciencescore.get(nationalcode=self.nationalcode).delete()
@@ -231,7 +231,7 @@ class Quranscore(models.Model):
     def __str__(self):
         return self.name
 
-class Biologycore(models.Model):
+class Biologyscore(models.Model):
     name = models.CharField(verbose_name='نام و نام خانوادگي', max_length = 100)
     nationalcode = models.IntegerField(verbose_name='کد ملي', null=False, blank=False)
     grade_number = models.IntegerField(verbose_name='شماره کلاس', default=0)

@@ -81,8 +81,8 @@ class QuranscoreAdmin(admin.ModelAdmin):
     list_editable = ('score', )
     list_filter = ('grade_number','term')
 
-@admin.register(models.Biologycore)
-class BiologycoreAdmin(admin.ModelAdmin):
+@admin.register(models.Biologyscore)
+class BiologyscoreAdmin(admin.ModelAdmin):
     search_fields = ('name','nationalcode',)
     list_display = ('name','nationalcode','score','grade_number','term')
     list_editable = ('score', )

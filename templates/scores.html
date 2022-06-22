@@ -61,106 +61,106 @@
           <tr>
             <th scope="col">نام درس</th>
             <th scope="col">نمره</th>
-            <th scope="col">میانگین</th>
+            <th scope="col">میانگین کلاس</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <th scope="row">ریاضی</th>
             <td>{{mathscore}}</td>
-            <td>{{mathscore}}</td>
+            <td>{{mathAvg|floatformat:1}}</td>
           </tr>
           <tr>
             <th scope="row">ادبیات فارسی</th>
             <td>{{literaturescore}}</td>
-            <td>{{literaturescore}}</td>
+            <td>{{literatureAvg|floatformat:1}}</td>
           </tr>
           {% if student.class_number == 701 or student.class_number == 702 or student.class_number == 703 or student.grade_number == 801 or student.grade_number == 802 or student.grade_number == 803 %}
             <tr>
               <th scope="row">تفکر و سبک زندگی</th>
               <td>{{lifestylescore}}</td>
-              <td>{{lifestylescore}}</td>
+              <td>{{lifestyleAvg|floatformat:1}}</td>
             </tr>
           {% endif %}
           {% if student.class_number == 901 or student.class_number == 902 or student.class_number == 903 %}
             <tr>
               <th scope="row">دفاعی</th>
               <td>{{defensescore}}</td>
-              <td>{{defensescore}}</td>
+              <td>{{defenseAvg|floatformat:1}}</td>
             </tr>
           {% endif %}
           <tr>
             <th scope="row">هنر</th>
             <td>{{artscore}}</td>
-            <td>{{artscore}}</td>
+            <td>{{artAvg|floatformat:1}}</td>
           </tr>
           <tr>
             <th scope="row">مطالعات اجتماعی</th>
             <td>{{socialstudiesscore}}</td>
-            <td>{{socialstudiesscore}}</td>
+            <td>{{socialstudiesAvg|floatformat:1}}</td>
           </tr>
           <tr>
             <th scope="row">زبان انگلیسی</th>
             <td>{{englishscore}}</td>
-            <td>{{englishscore}}</td>
+            <td>{{englishAvg|floatformat:1}}</td>
           </tr>
           <tr>
             <th scope="row">کار و فناوری</th>
             <td>{{computerscore}}</td>
-            <td>{{computerscore}}</td>
+            <td>{{computerAvg|floatformat:1}}</td>
           </tr>
           <tr>
             <th scope="row">دینی</th>
             <td>{{religiousscore}}</td>
-            <td>{{religiousscore}}</td>
+            <td>{{religiousAvg|floatformat:1}}</td>
           </tr>
           <tr>
             <th scope="row">قرآن</th>
             <td>{{quranscore}}</td>
-            <td>{{quranscore}}</td>
+            <td>{{quranAvg|floatformat:1}}</td>
           </tr>
           {% if sciencescore == 'نمره هنوز ثبت نشده' %}
           <tr>
             <th scope="row">زیست</th>
-            <td>{{biologycore}}</td>
-            <td>{{biologycore}}</td>
+            <td>{{biologyscore}}</td>
+            <td>{{biologyAvg|floatformat:1}}</td>
           </tr>
           <tr>
             <th scope="row">فیزیک</th>
             <td>{{physicsscore}}</td>
-            <td>{{physicsscore}}</td>
+            <td>{{physicsAvg|floatformat:1}}</td>
           </tr>
           <tr>
             <th scope="row">شیمی</th>
             <td>{{chemistryscore}}</td>
-            <td>{{chemistryscore}}</td>
+            <td>{{chemistryAvg|floatformat:1}}</td>
           </tr>
           {% else %}
           <tr>
             <th scope="row">علوم تجربی</th>
             <td>{{sciencescore}}</td>
-            <td>{{sciencescore}}</td>
+            <td>{{scienceAvg|floatformat:1}}</td>
           </tr>
           {% endif %}
           <tr>
             <th scope="row">تربیت بدنی</th>
             <td>{{sportscore}}</td>
-            <td>{{sportscore}}</td>
+            <td>{{sportAvg|floatformat:1}}</td>
           </tr>
           <tr>
             <th scope="row">زبان عربی</th>
             <td>{{arabicscore}}</td>
-            <td>{{arabicscore}}</td>
+            <td>{{arabicAvg|floatformat:1}}</td>
           </tr>
           <tr>
             <th scope="row">انشا</th>
             <td>{{essayscore}}</td>
-            <td>{{essayscore}}</td>
+            <td>{{essayAvg|floatformat:1}}</td>
           </tr>
           <tr>
             <th scope="row">املا</th>
             <td>{{spellingscore}}</td>
-            <td>{{spellingscore}}</td>
+            <td>{{spellingAvg|floatformat:1}}</td>
           </tr>
         </tbody>
       </table>

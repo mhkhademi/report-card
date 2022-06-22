@@ -14,7 +14,8 @@ admin.site.index_title = 'به بخش مديريت سامانه نمرات مد�
 urlpatterns = [
     path('', views.home, name='home'),
     path('bot/', views.bot, name='bot'),
-    path('upload/', views.upload, name='upload'),
+    path('upload_students/', views.upload_students, name='upload_students'),
+    path('upload_scores/', views.upload_scores, name='upload_scores'),
     path('delete/', views.delete, name='delete'),
     path('getscore/', include('getscore.urls')),
     path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),

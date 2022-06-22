@@ -30,7 +30,7 @@ def bot(request):
     return render(request, 'bot.html')
 
 
-def upload(request):
+def upload_students(request):
     file = request.FILES['file']
     fs = FileSystemStorage(location='bot')
     if file.name.split('.')[-1]=='xlsx':
@@ -38,7 +38,22 @@ def upload(request):
         if fs.exists(filename):
             fs.delete(filename)
         fs.save(filename, file)
-        subprocess.Popen(["python", "bot/main.py", "delete"])
+        subprocess.Popen(["python", "bot/main.py", "import"])
+        messages.success(request, 'فایل با موفقیت آپلود شد')
+    else:
+        messages.warning(request, 'فرمت فایل حتما باید اکسل باشد')
+    return redirect(bot)
+
+
+def upload_scores(request):
+    file = request.FILES['file']
+    fs = FileSystemStorage(location='bot')
+    if file.name.split('.')[-1]=='xlsx':
+        filename = 'scores.xlsx'
+        if fs.exists(filename):
+            fs.delete(filename)
+        fs.save(filename, file)
+        subprocess.Popen(["python", "bot/scores.py", "import"])
         messages.success(request, 'فایل با موفقیت آپلود شد')
     else:
         messages.warning(request, 'فرمت فایل حتما باید اکسل باشد')

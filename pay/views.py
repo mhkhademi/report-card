@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
-# Github.com/Rasooll
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from main.models import Student
 from persian_tools import separator, digits
+from django.contrib import messages
 import requests
 import json
 
@@ -28,15 +27,14 @@ def tuition(request):
         student = Student.objects.get(nationalcode = nationalcode)
         tuition = student.tuition
         amount = tuition
-        if tuition != 0:
-            payload=f"api_key={API_KEY}&amount={amount}&\
-                order_id=allameh1hmd{nationalcode}&callback_uri={CallbackURL}"
-            headers = {
-                'User-Agent': 'PostmanRuntime/7.26.8',
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-            response = requests.request("POST", NP_API_REQUEST, headers=headers, data=payload)
-            trans_id = response.text[23:59]
+        payload=f"api_key={API_KEY}&amount={amount}&\
+            order_id=allameh1hmd{nationalcode}&callback_uri={CallbackURL}"
+        headers = {
+            'User-Agent': 'PostmanRuntime/7.26.8',
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+        response = requests.request("POST", NP_API_REQUEST, headers=headers, data=payload)
+        trans_id = response.text[23:59]
         return render(request, 'tuition.html', {'trans_id':trans_id, 'tuition':separator.add(tuition), 'tuitionfa':digits.convert_to_word(tuition)+' تومان', 'name':student.name, 'nationalcode':nationalcode})
 
 

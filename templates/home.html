@@ -75,8 +75,20 @@
         </div>
         <br>
         <div class="d-flex justify-content-center">
+          <form class="form-inline" action="{% url 'bot' %}">
+            <button type="submit" class="btn btn-success btn-lg">ربات</button>
+          </form>
+        </div>
+        <br>
+        <div class="d-flex justify-content-center">
+          <form class="form-inline" action="{% url 'admin:index' %}">
+            <button type="submit" class="btn btn-success btn-lg">ادمین</button>
+          </form>
+        </div>
+        <br>
+        <div class="d-flex justify-content-center">
           <form class="form-inline" action="{% url 'tuition:tuition' %}">
-            <button type="submit" class="btn btn-danger btn-lg" disabled>پرداخت شهریه</button>
+            <button type="submit" class="btn btn-danger btn-lg">پرداخت شهریه</button>
           </form>
         </div>
 		</br>

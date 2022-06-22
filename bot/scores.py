@@ -97,7 +97,7 @@ def import_score():
                 cur.execute("UPDATE main_quranscore SET score=? where nationalcode = ? AND \
                     term = ? ;", (score, nationalcode, int(TERM_CHOICES[cterm])))
             if lesson == 10:
-                cur.execute("UPDATE main_biologycore SET score=? where nationalcode = ? AND \
+                cur.execute("UPDATE main_biologyscore SET score=? where nationalcode = ? AND \
                     term = ? ;", (score, nationalcode, int(TERM_CHOICES[cterm])))
             if lesson == 11:
                 cur.execute("UPDATE main_physicsscore SET score=? where nationalcode = ? AND \

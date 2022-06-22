@@ -93,7 +93,7 @@ def import_data():
                 cur.execute("INSERT INTO main_quranscore (name,score,grade_number,\
                     term,nationalcode) VALUES (?,?,?,?,?);", \
                         (cname, 0, class_number, term, nationalcode))
-                cur.execute("INSERT INTO main_biologycore (name,score,grade_number,\
+                cur.execute("INSERT INTO main_biologyscore (name,score,grade_number,\
                     term,nationalcode) VALUES (?,?,?,?,?);", \
                         (cname, 0, class_number, term, nationalcode))
                 cur.execute("INSERT INTO main_physicsscore (name,score,grade_number,\
@@ -154,7 +154,7 @@ def delete_all():
     cur.execute("DELETE FROM main_computerscore")
     cur.execute("DELETE FROM main_religiousscore")
     cur.execute("DELETE FROM main_quranscore")
-    cur.execute("DELETE FROM main_biologycore")
+    cur.execute("DELETE FROM main_biologyscore")
     cur.execute("DELETE FROM main_physicsscore")
     cur.execute("DELETE FROM main_chemistryscore")
     cur.execute("DELETE FROM main_sciencescore")

@@ -39,18 +39,20 @@
         <br>
         <div class="d-flex justify-content-center">
           <form class="form-inline" action="https://nextpay.org/nx/gateway/payment/{{ trans_id }}" method="post">
-            {% if tuition %}
+            {% if tuitionfa == 'صفر تومان' or tuition == 0%}
               {% csrf_token %}
-              <button type="submit" class="btn btn-secondary btn-lg">پرداخت شهریه</button>
-            {% else %}
               <button type="submit" class="btn btn-secondary btn-lg" disabled>پرداخت شهریه</button>
+            {% else %}
+              <button type="submit" class="btn btn-secondary btn-lg">پرداخت شهریه</button>
             {% endif %}
           </form>
         </div>
         <br>
         <div class="d-flex justify-content-center">
-          <style>#nextpay{margin:auto} #nextpay img {width: 80px;}</style> <div id="nextpay">
-            <script src="https://nextpay.org/nx/js-trust/18138" type="text/javascript"></script> </div>
+          <style>#nextpay{margin:auto} #nextpay img {width: 80px;}</style>
+            <div id="nextpay">
+              <script src="https://nextpay.org/nx/js-trust/18138" type="text/javascript"></script>
+            </div>
         </div>
     </div>
 </body>
